@@ -1,1 +1,472 @@
-index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06120d">
+  <title>Bakibuka Análise</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #123323 0%, #07130e 40%, #020604 100%);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 26px 18px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .topo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .voltar {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: 1px solid #315541;
+      background: #101914;
+      color: #cbd8d0;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #24d873, #0b703a);
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      box-shadow: 0 0 24px rgba(36, 216, 115, 0.28);
+    }
+
+    .titulo {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .titulo h1 {
+      font-size: clamp(22px, 5vw, 34px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .titulo p {
+      color: #8fa398;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+
+    .ao-vivo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 16px;
+      border: 1px solid #1fa95c;
+      border-radius: 999px;
+      background: rgba(20, 117, 63, 0.2);
+      color: #39ed88;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .ponto-vivo {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #25e878;
+      box-shadow: 0 0 14px #25e878;
+      animation: pulsar 1.2s infinite;
+    }
+
+    @keyframes pulsar {
+      50% {
+        opacity: 0.35;
+        transform: scale(0.75);
+      }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 240px;
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid #236640;
+      background: linear-gradient(145deg, #10271a, #0b1c13);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+    }
+
+    .card h2 {
+      color: #d7e4dc;
+      font-size: 19px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icone {
+      color: #32e47e;
+      font-size: 25px;
+    }
+
+    .carregando {
+      width: 46px;
+      height: 46px;
+      margin: 48px auto 34px;
+      border-radius: 50%;
+      border: 7px solid #294b37;
+      border-top-color: #2be67d;
+      animation: girar 1s linear infinite;
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .status {
+      color: #2fe77e;
+      font-size: 21px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .status span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: #25de73;
+      border-radius: 50%;
+      margin-right: 8px;
+      box-shadow: 0 0 12px #25de73;
+    }
+
+    .sinal {
+      min-height: 130px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    #sinalAtual {
+      font-size: 43px;
+      font-weight: 900;
+      color: #45ef94;
+    }
+
+    #confianca {
+      color: #8fa398;
+      margin-top: 10px;
+    }
+
+    .painel {
+      margin-top: 22px;
+      min-height: 500px;
+      padding: 28px 22px;
+      border-radius: 32px;
+      background: rgba(0, 0, 0, 0.78);
+      border: 1px solid #163d28;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .painel h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .historico {
+      display: grid;
+      gap: 12px;
+    }
+
+    .linha {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 17px;
+      border-radius: 16px;
+      background: #0c1811;
+      border: 1px solid #193d29;
+    }
+
+    .resultado {
+      color: #36e886;
+      font-weight: bold;
+    }
+
+    .aviso {
+      color: #7f9387;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: auto;
+      padding: 30px 5px 22px;
+      text-align: center;
+    }
+
+    .botao-estatisticas {
+      align-self: center;
+      border: none;
+      border-radius: 999px;
+      padding: 19px 34px;
+      background: linear-gradient(135deg, #35e986, #11974e);
+      color: #021309;
+      font-size: 19px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(38, 226, 121, 0.25);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.78);
+    }
+
+    .modal.aberto {
+      display: flex;
+    }
+
+    .modal-conteudo {
+      width: min(420px, 100%);
+      padding: 28px;
+      border-radius: 25px;
+      background: #102219;
+      border: 1px solid #27834e;
+    }
+
+    .modal-conteudo h2 {
+      margin-bottom: 20px;
+    }
+
+    .estatistica {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      color: #c9d8cf;
+    }
+
+    .fechar {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      background: #2be57e;
+      color: #041108;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding: 22px 14px 30px;
+      }
+
+      .topo {
+        gap: 9px;
+      }
+
+      .voltar {
+        width: 45px;
+        height: 45px;
+      }
+
+      .logo {
+        width: 49px;
+        height: 49px;
+      }
+
+      .ao-vivo {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 215px;
+      }
+
+      .painel {
+        min-height: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="topo">
+      <button class="voltar" onclick="history.back()" aria-label="Voltar">‹</button>
+
+      <div class="logo">📊</div>
+
+      <div class="titulo">
+        <h1>Bakibuka Análise</h1>
+        <p>Painel inteligente de demonstração</p>
+      </div>
+
+      <div class="ao-vivo">
+        <span class="ponto-vivo"></span>
+        AO VIVO
+      </div>
+    </header>
+
+    <section class="cards">
+      <article class="card">
+        <h2><span class="icone">◉</span>Status da análise</h2>
+        <div class="carregando"></div>
+        <p class="status">
+          <span></span>
+          Análise em tempo real
+        </p>
+      </article>
+
+      <article class="card">
+        <h2><span class="icone">⌁</span>Sinal atual</h2>
+
+        <div class="sinal">
+          <div>
+            <div id="sinalAtual">AGUARDE</div>
+            <p id="confianca">Processando informações...</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="painel">
+      <h2>Últimas análises</h2>
+
+      <div class="historico" id="historico">
+        <div class="linha">
+          <span>Aguardando novo sinal</span>
+          <span class="resultado">● ONLINE</span>
+        </div>
+      </div>
+
+      <p class="aviso">
+        Esta versão usa sinais simulados apenas para demonstrar o visual.
+        Os dados reais serão conectados depois por uma API.
+      </p>
+
+      <button class="botao-estatisticas" onclick="abrirEstatisticas()">
+        📊 Estatísticas
+      </button>
+    </section>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal-conteudo">
+      <h2>Estatísticas da sessão</h2>
+
+      <div class="estatistica">
+        <span>Análises realizadas</span>
+        <strong id="totalAnalises">0</strong>
+      </div>
+
+      <div class="estatistica">
+        <span>Sistema</span>
+        <strong style="color:#35e986">ONLINE</strong>
+      </div>
+
+      <div class="estatistica">
+        <span>Atualização</span>
+        <strong>A cada 5 segundos</strong>
+      </div>
+
+      <button class="fechar" onclick="fecharEstatisticas()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    const sinais = [
+      { nome: "VERDE", confianca: "Confiança simulada: 82%" },
+      { nome: "AMARELO", confianca: "Confiança simulada: 67%" },
+      { nome: "AGUARDE", confianca: "Analisando nova rodada..." }
+    ];
+
+    let total = 0;
+
+    function atualizarSinal() {
+      const escolhido = sinais[Math.floor(Math.random() * sinais.length)];
+      const sinalAtual = document.getElementById("sinalAtual");
+      const confianca = document.getElementById("confianca");
+      const historico = document.getElementById("historico");
+
+      sinalAtual.textContent = escolhido.nome;
+      confianca.textContent = escolhido.confianca;
+
+      if (escolhido.nome === "VERDE") {
+        sinalAtual.style.color = "#3af08a";
+      } else if (escolhido.nome === "AMARELO") {
+        sinalAtual.style.color = "#ffd84d";
+      } else {
+        sinalAtual.style.color = "#8ca196";
+      }
+
+      total++;
+      document.getElementById("totalAnalises").textContent = total;
+
+      const hora = new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+
+      const novaLinha = document.createElement("div");
+      novaLinha.className = "linha";
+      novaLinha.innerHTML =
+        "<span>" + hora + "</span>" +
+        "<span class='resultado'>" + escolhido.nome + "</span>";
+
+      historico.prepend(novaLinha);
+
+      while (historico.children.length > 5) {
+        historico.removeChild(historico.lastChild);
+      }
+    }
+
+    function abrirEstatisticas() {
+      document.getElementById("modal").classList.add("aberto");
+    }
+
+    function fecharEstatisticas() {
+      document.getElementById("modal").classList.remove("aberto");
+    }
+
+    atualizarSinal();
+    setInterval(atualizarSinal, 5000);
+  </script>
+</body>
+</html>
