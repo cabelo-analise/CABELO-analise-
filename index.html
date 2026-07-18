@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#06120d">
-  <title>Bakibuka Análise</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Painel Bac Bo</title>
 
   <style>
     * {
@@ -16,310 +16,280 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at top, #123323 0%, #07130e 40%, #020604 100%);
-      color: white;
+        radial-gradient(circle at top, #123524 0%, #08130f 45%, #030806 100%);
+      color: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
-      padding: 26px 18px 40px;
+      padding: 18px;
     }
 
     .container {
       width: 100%;
-      max-width: 900px;
-      margin: auto;
+      max-width: 780px;
+      margin: 0 auto;
     }
 
     .topo {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .voltar {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      border: 1px solid #315541;
-      background: #101914;
-      color: #cbd8d0;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    .logo {
-      width: 58px;
-      height: 58px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #24d873, #0b703a);
-      display: grid;
-      place-items: center;
-      font-size: 30px;
-      box-shadow: 0 0 24px rgba(36, 216, 115, 0.28);
-    }
-
-    .titulo {
-      flex: 1;
-      min-width: 0;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
     .titulo h1 {
-      font-size: clamp(22px, 5vw, 34px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 25px;
+      margin-bottom: 5px;
     }
 
     .titulo p {
-      color: #8fa398;
+      color: #98aaa2;
       font-size: 13px;
-      margin-top: 5px;
     }
 
     .ao-vivo {
       display: flex;
       align-items: center;
-      gap: 9px;
-      padding: 12px 16px;
-      border: 1px solid #1fa95c;
+      gap: 7px;
+      padding: 9px 13px;
+      border: 1px solid #19df78;
       border-radius: 999px;
-      background: rgba(20, 117, 63, 0.2);
-      color: #39ed88;
-      font-weight: 800;
-      white-space: nowrap;
+      background: rgba(25, 223, 120, 0.12);
+      color: #54f59d;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .ponto-vivo {
-      width: 13px;
-      height: 13px;
+    .bolinha {
+      width: 9px;
+      height: 9px;
+      background: #2cff8a;
       border-radius: 50%;
-      background: #25e878;
-      box-shadow: 0 0 14px #25e878;
-      animation: pulsar 1.2s infinite;
+      box-shadow: 0 0 12px #2cff8a;
+      animation: piscar 1.2s infinite;
     }
 
-    @keyframes pulsar {
+    @keyframes piscar {
       50% {
         opacity: 0.35;
-        transform: scale(0.75);
       }
     }
 
-    .cards {
+    .grade {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
     .card {
-      min-height: 240px;
-      padding: 24px;
-      border-radius: 28px;
-      border: 1px solid #236640;
-      background: linear-gradient(145deg, #10271a, #0b1c13);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+      background: rgba(12, 31, 23, 0.92);
+      border: 1px solid rgba(64, 255, 151, 0.2);
+      border-radius: 17px;
+      padding: 17px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
     }
 
-    .card h2 {
-      color: #d7e4dc;
-      font-size: 19px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .card-titulo {
+      color: #8ba198;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+
+    .valor {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4cff9c;
+    }
+
+    .valor-branco {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .descricao {
+      margin-top: 7px;
+      color: #9eb0a8;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .analise-principal {
+      text-align: center;
+      margin-bottom: 14px;
+      padding: 24px 18px;
     }
 
     .icone {
-      color: #32e47e;
-      font-size: 25px;
-    }
-
-    .carregando {
-      width: 46px;
-      height: 46px;
-      margin: 48px auto 34px;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 13px;
       border-radius: 50%;
-      border: 7px solid #294b37;
-      border-top-color: #2be67d;
-      animation: girar 1s linear infinite;
-    }
-
-    @keyframes girar {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .status {
-      color: #2fe77e;
-      font-size: 21px;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .status span {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      background: #25de73;
-      border-radius: 50%;
-      margin-right: 8px;
-      box-shadow: 0 0 12px #25de73;
-    }
-
-    .sinal {
-      min-height: 130px;
+      background: rgba(34, 255, 133, 0.12);
+      border: 1px solid #28e985;
       display: grid;
       place-items: center;
+      font-size: 28px;
+    }
+
+    .tendencia {
+      font-size: 31px;
+      font-weight: bold;
+      color: #56ffa5;
+      margin: 8px 0;
+    }
+
+    .barra {
+      width: 100%;
+      height: 10px;
+      background: #18291f;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progresso {
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, #15b865, #54ffa5);
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .estatisticas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 13px;
+    }
+
+    .mini-card {
+      background: #091a12;
+      border: 1px solid rgba(55, 255, 144, 0.16);
+      border-radius: 13px;
+      padding: 13px 8px;
       text-align: center;
     }
 
-    #sinalAtual {
-      font-size: 43px;
-      font-weight: 900;
-      color: #45ef94;
+    .mini-card strong {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 4px;
     }
 
-    #confianca {
-      color: #8fa398;
-      margin-top: 10px;
+    .mini-card span {
+      color: #8ea198;
+      font-size: 11px;
     }
 
-    .painel {
-      margin-top: 22px;
-      min-height: 500px;
-      padding: 28px 22px;
-      border-radius: 32px;
-      background: rgba(0, 0, 0, 0.78);
-      border: 1px solid #163d28;
-      display: flex;
-      flex-direction: column;
+    .jogador strong {
+      color: #55a7ff;
     }
 
-    .painel h2 {
-      font-size: 22px;
-      margin-bottom: 20px;
+    .empate strong {
+      color: #f2cf58;
+    }
+
+    .banca strong {
+      color: #ff6565;
     }
 
     .historico {
-      display: grid;
-      gap: 12px;
-    }
-
-    .linha {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 17px;
-      border-radius: 16px;
-      background: #0c1811;
-      border: 1px solid #193d29;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
     }
 
     .resultado {
-      color: #36e886;
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
       font-weight: bold;
+    }
+
+    .resultado-jogador {
+      background: #123c69;
+      color: #72baff;
+      border: 1px solid #398ee2;
+    }
+
+    .resultado-banca {
+      background: #541c1c;
+      color: #ff8585;
+      border: 1px solid #de4d4d;
+    }
+
+    .resultado-empate {
+      background: #4b4014;
+      color: #ffe377;
+      border: 1px solid #d6b944;
+    }
+
+    .botoes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 8px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-jogador {
+      background: #1f75c9;
+    }
+
+    .btn-empate {
+      background: #9d8424;
+    }
+
+    .btn-banca {
+      background: #c93d3d;
+    }
+
+    .btn-limpar {
+      width: 100%;
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid #385146;
+      color: #a8b8b0;
     }
 
     .aviso {
-      color: #7f9387;
-      font-size: 12px;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 12px;
+      background: rgba(255, 203, 77, 0.08);
+      border: 1px solid rgba(255, 203, 77, 0.2);
+      color: #d5c68c;
+      font-size: 11px;
       line-height: 1.5;
-      margin-top: auto;
-      padding: 30px 5px 22px;
       text-align: center;
     }
 
-    .botao-estatisticas {
-      align-self: center;
-      border: none;
-      border-radius: 999px;
-      padding: 19px 34px;
-      background: linear-gradient(135deg, #35e986, #11974e);
-      color: #021309;
-      font-size: 19px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(38, 226, 121, 0.25);
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.78);
-    }
-
-    .modal.aberto {
-      display: flex;
-    }
-
-    .modal-conteudo {
-      width: min(420px, 100%);
-      padding: 28px;
-      border-radius: 25px;
-      background: #102219;
-      border: 1px solid #27834e;
-    }
-
-    .modal-conteudo h2 {
-      margin-bottom: 20px;
-    }
-
-    .estatistica {
-      display: flex;
-      justify-content: space-between;
-      margin: 15px 0;
-      color: #c9d8cf;
-    }
-
-    .fechar {
-      width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-      border: none;
-      border-radius: 14px;
-      background: #2be57e;
-      color: #041108;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    @media (max-width: 650px) {
-      body {
-        padding: 22px 14px 30px;
-      }
-
-      .topo {
-        gap: 9px;
-      }
-
-      .voltar {
-        width: 45px;
-        height: 45px;
-      }
-
-      .logo {
-        width: 49px;
-        height: 49px;
-      }
-
-      .ao-vivo {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .cards {
+    @media (max-width: 520px) {
+      .grade {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        min-height: 215px;
+      .titulo h1 {
+        font-size: 21px;
       }
 
-      .painel {
-        min-height: 420px;
+      .tendencia {
+        font-size: 27px;
       }
     }
   </style>
@@ -328,145 +298,230 @@
 <body>
   <main class="container">
     <header class="topo">
-      <button class="voltar" onclick="history.back()" aria-label="Voltar">‹</button>
-
-      <div class="logo">📊</div>
-
       <div class="titulo">
-        <h1>Bakibuka Análise</h1>
-        <p>Painel inteligente de demonstração</p>
+        <h1>Painel Bac Bo</h1>
+        <p>Histórico e leitura estatística</p>
       </div>
 
       <div class="ao-vivo">
-        <span class="ponto-vivo"></span>
+        <span class="bolinha"></span>
         AO VIVO
       </div>
     </header>
 
-    <section class="cards">
+    <section class="grade">
       <article class="card">
-        <h2><span class="icone">◉</span>Status da análise</h2>
-        <div class="carregando"></div>
-        <p class="status">
-          <span></span>
-          Análise em tempo real
-        </p>
+        <div class="card-titulo">Status da análise</div>
+        <div class="valor">ATIVA</div>
+        <p class="descricao">O painel está acompanhando os resultados registrados.</p>
       </article>
 
       <article class="card">
-        <h2><span class="icone">⌁</span>Sinal atual</h2>
-
-        <div class="sinal">
-          <div>
-            <div id="sinalAtual">AGUARDE</div>
-            <p id="confianca">Processando informações...</p>
-          </div>
-        </div>
+        <div class="card-titulo">Rodadas analisadas</div>
+        <div class="valor-branco" id="totalRodadas">0</div>
+        <p class="descricao">Resultados armazenados neste aparelho.</p>
       </article>
     </section>
 
-    <section class="painel">
-      <h2>Últimas análises</h2>
+    <section class="card analise-principal">
+      <div class="icone">📊</div>
+      <div class="card-titulo">Leitura estatística atual</div>
 
-      <div class="historico" id="historico">
-        <div class="linha">
-          <span>Aguardando novo sinal</span>
-          <span class="resultado">● ONLINE</span>
-        </div>
-      </div>
+      <div class="tendencia" id="tendencia">AGUARDANDO DADOS</div>
 
-      <p class="aviso">
-        Esta versão usa sinais simulados apenas para demonstrar o visual.
-        Os dados reais serão conectados depois por uma API.
+      <p class="descricao" id="mensagemAnalise">
+        Adicione resultados anteriores para iniciar a análise.
       </p>
 
-      <button class="botao-estatisticas" onclick="abrirEstatisticas()">
-        📊 Estatísticas
+      <div class="barra">
+        <div class="progresso" id="barraConfianca"></div>
+      </div>
+
+      <p class="descricao">
+        Força da tendência histórica: <strong id="confianca">0%</strong>
+      </p>
+
+      <div class="estatisticas">
+        <div class="mini-card jogador">
+          <strong id="porcentagemJogador">0%</strong>
+          <span>Jogador</span>
+        </div>
+
+        <div class="mini-card empate">
+          <strong id="porcentagemEmpate">0%</strong>
+          <span>Empate</span>
+        </div>
+
+        <div class="mini-card banca">
+          <strong id="porcentagemBanca">0%</strong>
+          <span>Banca</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-titulo">Últimos resultados</div>
+
+      <div class="historico" id="historico">
+        <p class="descricao">Nenhum resultado adicionado.</p>
+      </div>
+
+      <div class="botoes">
+        <button class="btn-jogador" onclick="adicionarResultado('J')">
+          + Jogador
+        </button>
+
+        <button class="btn-empate" onclick="adicionarResultado('E')">
+          + Empate
+        </button>
+
+        <button class="btn-banca" onclick="adicionarResultado('B')">
+          + Banca
+        </button>
+      </div>
+
+      <button class="btn-limpar" onclick="limparHistorico()">
+        Limpar histórico
       </button>
     </section>
+
+    <div class="aviso">
+      Este painel mostra apenas estatísticas dos resultados registrados.
+      Ele não garante nem prevê o resultado da próxima rodada.
+    </div>
   </main>
 
-  <div class="modal" id="modal">
-    <div class="modal-conteudo">
-      <h2>Estatísticas da sessão</h2>
-
-      <div class="estatistica">
-        <span>Análises realizadas</span>
-        <strong id="totalAnalises">0</strong>
-      </div>
-
-      <div class="estatistica">
-        <span>Sistema</span>
-        <strong style="color:#35e986">ONLINE</strong>
-      </div>
-
-      <div class="estatistica">
-        <span>Atualização</span>
-        <strong>A cada 5 segundos</strong>
-      </div>
-
-      <button class="fechar" onclick="fecharEstatisticas()">Fechar</button>
-    </div>
-  </div>
-
   <script>
-    const sinais = [
-      { nome: "VERDE", confianca: "Confiança simulada: 82%" },
-      { nome: "AMARELO", confianca: "Confiança simulada: 67%" },
-      { nome: "AGUARDE", confianca: "Analisando nova rodada..." }
-    ];
+    let resultados = JSON.parse(localStorage.getItem("bacboResultados")) || [];
 
-    let total = 0;
+    function adicionarResultado(tipo) {
+      resultados.push(tipo);
 
-    function atualizarSinal() {
-      const escolhido = sinais[Math.floor(Math.random() * sinais.length)];
-      const sinalAtual = document.getElementById("sinalAtual");
-      const confianca = document.getElementById("confianca");
-      const historico = document.getElementById("historico");
-
-      sinalAtual.textContent = escolhido.nome;
-      confianca.textContent = escolhido.confianca;
-
-      if (escolhido.nome === "VERDE") {
-        sinalAtual.style.color = "#3af08a";
-      } else if (escolhido.nome === "AMARELO") {
-        sinalAtual.style.color = "#ffd84d";
-      } else {
-        sinalAtual.style.color = "#8ca196";
+      if (resultados.length > 100) {
+        resultados.shift();
       }
 
-      total++;
-      document.getElementById("totalAnalises").textContent = total;
+      salvarEAtualizar();
+    }
 
-      const hora = new Date().toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
+    function limparHistorico() {
+      const confirmar = confirm("Deseja apagar todos os resultados?");
 
-      const novaLinha = document.createElement("div");
-      novaLinha.className = "linha";
-      novaLinha.innerHTML =
-        "<span>" + hora + "</span>" +
-        "<span class='resultado'>" + escolhido.nome + "</span>";
-
-      historico.prepend(novaLinha);
-
-      while (historico.children.length > 5) {
-        historico.removeChild(historico.lastChild);
+      if (confirmar) {
+        resultados = [];
+        salvarEAtualizar();
       }
     }
 
-    function abrirEstatisticas() {
-      document.getElementById("modal").classList.add("aberto");
+    function salvarEAtualizar() {
+      localStorage.setItem("bacboResultados", JSON.stringify(resultados));
+      atualizarPainel();
     }
 
-    function fecharEstatisticas() {
-      document.getElementById("modal").classList.remove("aberto");
+    function calcularPorcentagem(quantidade, total) {
+      if (total === 0) return 0;
+      return Math.round((quantidade / total) * 100);
     }
 
-    atualizarSinal();
-    setInterval(atualizarSinal, 5000);
+    function atualizarPainel() {
+      const total = resultados.length;
+
+      const jogador = resultados.filter(item => item === "J").length;
+      const empate = resultados.filter(item => item === "E").length;
+      const banca = resultados.filter(item => item === "B").length;
+
+      const porcentagemJogador = calcularPorcentagem(jogador, total);
+      const porcentagemEmpate = calcularPorcentagem(empate, total);
+      const porcentagemBanca = calcularPorcentagem(banca, total);
+
+      document.getElementById("totalRodadas").textContent = total;
+      document.getElementById("porcentagemJogador").textContent =
+        porcentagemJogador + "%";
+      document.getElementById("porcentagemEmpate").textContent =
+        porcentagemEmpate + "%";
+      document.getElementById("porcentagemBanca").textContent =
+        porcentagemBanca + "%";
+
+      let tendencia = "AGUARDANDO DADOS";
+      let mensagem = "Adicione resultados anteriores para iniciar a análise.";
+      let confianca = 0;
+
+      if (total >= 5) {
+        const maiorPorcentagem = Math.max(
+          porcentagemJogador,
+          porcentagemBanca,
+          porcentagemEmpate
+        );
+
+        confianca = maiorPorcentagem;
+
+        if (
+          porcentagemJogador === porcentagemBanca ||
+          maiorPorcentagem - Math.min(porcentagemJogador, porcentagemBanca) < 5
+        ) {
+          tendencia = "SEM TENDÊNCIA FORTE";
+          mensagem = "Jogador e banca estão com resultados próximos no histórico.";
+        } else if (maiorPorcentagem === porcentagemJogador) {
+          tendencia = "MAIOR FREQUÊNCIA: JOGADOR";
+          mensagem = "O jogador apareceu mais vezes nos resultados registrados.";
+        } else if (maiorPorcentagem === porcentagemBanca) {
+          tendencia = "MAIOR FREQUÊNCIA: BANCA";
+          mensagem = "A banca apareceu mais vezes nos resultados registrados.";
+        } else {
+          tendencia = "MAIOR FREQUÊNCIA: EMPATE";
+          mensagem = "O empate apareceu com frequência elevada no histórico.";
+        }
+      }
+
+      document.getElementById("tendencia").textContent = tendencia;
+      document.getElementById("mensagemAnalise").textContent = mensagem;
+      document.getElementById("confianca").textContent = confianca + "%";
+      document.getElementById("barraConfianca").style.width = confianca + "%";
+
+      atualizarHistorico();
+    }
+
+    function atualizarHistorico() {
+      const area = document.getElementById("historico");
+      area.innerHTML = "";
+
+      if (resultados.length === 0) {
+        area.innerHTML =
+          '<p class="descricao">Nenhum resultado adicionado.</p>';
+        return;
+      }
+
+      resultados
+        .slice()
+        .reverse()
+        .slice(0, 30)
+        .forEach(tipo => {
+          const item = document.createElement("div");
+          item.classList.add("resultado");
+
+          if (tipo === "J") {
+            item.classList.add("resultado-jogador");
+            item.textContent = "J";
+            item.title = "Jogador";
+          }
+
+          if (tipo === "B") {
+            item.classList.add("resultado-banca");
+            item.textContent = "B";
+            item.title = "Banca";
+          }
+
+          if (tipo === "E") {
+            item.classList.add("resultado-empate");
+            item.textContent = "E";
+            item.title = "Empate";
+          }
+
+          area.appendChild(item);
+        });
+    }
+
+    atualizarPainel();
   </script>
 </body>
 </html>
