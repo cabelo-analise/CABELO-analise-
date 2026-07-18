@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Análise do Bac Bo</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Carteira Bac Bo</title>
 
   <style>
     * {
@@ -13,352 +18,1112 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #07111f;
-      color: white;
       min-height: 100vh;
-      padding-bottom: 40px;
+      background:
+        radial-gradient(circle at top, #123d2a, #06140e 55%);
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+      padding-bottom: 50px;
     }
 
-    header {
-      background: linear-gradient(135deg, #111d30, #162943);
-      padding: 22px 18px;
-      border-bottom: 1px solid #29405e;
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
-    header h1 {
+    .cabecalho {
+      padding: 25px 18px;
+      border-bottom: 1px solid #1e533a;
+      background: rgba(2, 20, 13, 0.85);
+    }
+
+    .cabecalho-conteudo {
+      max-width: 720px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cabecalho h1 {
       font-size: 25px;
       margin-bottom: 5px;
     }
 
-    header p {
-      color: #a8b5c7;
+    .cabecalho p {
+      color: #9eb8aa;
       font-size: 14px;
+    }
+
+    .selo-teste {
+      border: 1px solid #facc15;
+      color: #facc15;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
     }
 
     .container {
       width: 92%;
-      max-width: 700px;
-      margin: 20px auto;
+      max-width: 720px;
+      margin: 22px auto;
     }
 
-    .bacbo-image {
-      background: linear-gradient(135deg, #101f35, #0b1627);
-      border: 1px solid #29405e;
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
+    .aviso {
+      background: #332908;
+      color: #fde68a;
+      border: 1px solid #7b6616;
+      padding: 14px;
+      border-radius: 14px;
       margin-bottom: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .bacbo-image h2 {
-      font-size: 30px;
-      margin-bottom: 18px;
-      color: #f4c542;
+    .card {
+      background: rgba(6, 31, 20, 0.94);
+      border: 1px solid #235c40;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
     }
 
-    .mesa {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
+    .card h2,
+    .card h3 {
+      margin-bottom: 16px;
     }
 
-    .lado {
-      width: 120px;
-      padding: 15px;
-      border-radius: 15px;
+    .campo {
+      margin-bottom: 14px;
     }
 
-    .vermelho {
-      background: #b91c1c;
+    .campo label {
+      display: block;
+      color: #c6d7cd;
+      margin-bottom: 7px;
+      font-size: 14px;
     }
 
-    .azul {
-      background: #1d4ed8;
+    .campo input,
+    .campo select {
+      display: block;
+      width: 100%;
+      border: 1px solid #32694d;
+      background: #071b11;
+      color: white;
+      padding: 14px;
+      border-radius: 11px;
+      outline: none;
     }
 
-    .lado h3 {
-      margin-bottom: 10px;
+    .campo input:focus,
+    .campo select:focus {
+      border-color: #34d399;
     }
 
-    .dados {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .dado {
-      background: white;
-      color: #111;
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 23px;
-      font-weight: bold;
-    }
-
-    .acoes {
+    .botoes {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 11px;
     }
 
     button {
       border: none;
-      border-radius: 12px;
-      padding: 15px 10px;
-      font-size: 15px;
+      border-radius: 11px;
+      padding: 14px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .saldo {
-      background: #22c55e;
-      color: #03130a;
+    button:disabled {
+      opacity: 0.55;
+      cursor: wait;
     }
 
-    .conta {
-      background: #f4c542;
-      color: #211900;
+    .botao-principal {
+      background: #34d399;
+      color: #032117;
     }
 
-    .card {
-      background: #101c2d;
-      border: 1px solid #29405e;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 15px;
+    .botao-secundario {
+      background: #facc15;
+      color: #2a2100;
     }
 
-    .card h3 {
-      margin-bottom: 13px;
-      font-size: 17px;
+    .botao-sair {
+      background: transparent;
+      color: #fda4af;
+      border: 1px solid #9f3247;
     }
 
-    .valor {
-      font-size: 28px;
-      font-weight: bold;
-      color: #22c55e;
+    .mensagem {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.4;
     }
 
-    .linha {
+    .mensagem.sucesso {
+      display: block;
+      background: #083d2b;
+      border: 1px solid #199866;
+      color: #a7f3d0;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: #45141c;
+      border: 1px solid #a73548;
+      color: #fecdd3;
+    }
+
+    .oculto {
+      display: none !important;
+    }
+
+    .usuario-topo {
       display: flex;
       justify-content: space-between;
-      padding: 11px 0;
-      border-bottom: 1px solid #263850;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 16px;
     }
 
-    .linha:last-child {
+    .email-usuario {
+      color: #a7c4b5;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .saldo-card {
+      background: linear-gradient(135deg, #0d422b, #092519);
+      border: 1px solid #28a56e;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .saldo-label {
+      color: #b7d2c4;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .saldo-valor {
+      font-size: 36px;
+      font-weight: bold;
+      color: #5ee6ab;
+    }
+
+    .saldo-info {
+      color: #91ab9e;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .abas {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .aba {
+      flex: 1;
+      background: #0a2619;
+      color: #a9bdb2;
+      border: 1px solid #285b41;
+    }
+
+    .aba.ativa {
+      background: #34d399;
+      color: #032117;
+    }
+
+    .linha-historico {
+      border-bottom: 1px solid #234c37;
+      padding: 13px 0;
+    }
+
+    .linha-historico:last-child {
       border-bottom: none;
     }
 
-    .vermelho-texto {
-      color: #ef4444;
-      font-weight: bold;
-    }
-
-    .azul-texto {
-      color: #60a5fa;
-      font-weight: bold;
-    }
-
-    .amarelo-texto {
-      color: #f4c542;
-      font-weight: bold;
-    }
-
-    .resultado {
+    .linha-cabecalho {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
     }
 
-    .bolinha {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .tipo {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .valor {
       font-weight: bold;
     }
 
-    .bola-vermelha {
-      background: #dc2626;
+    .detalhes {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #92aa9d;
+      font-size: 13px;
     }
 
-    .bola-azul {
-      background: #2563eb;
+    .status {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .bola-empate {
-      background: #eab308;
-      color: #1f1600;
+    .status-pending {
+      color: #fde68a;
+      background: #3d310a;
     }
 
-    @media (max-width: 450px) {
-      .lado {
-        width: 105px;
+    .status-approved {
+      color: #a7f3d0;
+      background: #0a3e2b;
+    }
+
+    .status-rejected {
+      color: #fecdd3;
+      background: #48121c;
+    }
+
+    .sem-dados {
+      color: #8fa79a;
+      text-align: center;
+      padding: 18px 5px;
+    }
+
+    @media (max-width: 520px) {
+      .botoes {
+        grid-template-columns: 1fr;
       }
 
-      .acoes {
-        grid-template-columns: 1fr;
+      .cabecalho-conteudo {
+        align-items: flex-start;
+      }
+
+      .saldo-valor {
+        font-size: 31px;
       }
     }
   </style>
 </head>
 
 <body>
+  <header class="cabecalho">
+    <div class="cabecalho-conteudo">
+      <div>
+        <h1>Carteira Bac Bo</h1>
+        <p>Cadastro, saldo e movimentações</p>
+      </div>
 
-  <header>
-    <h1>Análise do Bac Bo</h1>
-    <p>Painel de controle e acompanhamento</p>
+      <div class="selo-teste">
+        MODO DE TESTE
+      </div>
+    </div>
   </header>
 
   <main class="container">
-
-    <section class="bacbo-image">
-      <h2>BAC BO</h2>
-
-      <div class="mesa">
-        <div class="lado vermelho">
-          <h3>Vermelho</h3>
-          <div class="dados">
-            <div class="dado">⚄</div>
-            <div class="dado">⚂</div>
-          </div>
-        </div>
-
-        <div class="lado azul">
-          <h3>Azul</h3>
-          <div class="dados">
-            <div class="dado">⚅</div>
-            <div class="dado">⚀</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="acoes">
-      <button class="saldo" onclick="adicionarSaldo()">
-        + Adicionar saldo
-      </button>
-
-      <button class="conta" onclick="adicionarConta()">
-        + Adicionar conta
-      </button>
+    <div class="aviso">
+      Nenhum pagamento real é realizado nesta versão.
+      Depósitos e saques ficam registrados como solicitações pendentes.
     </div>
 
-    <section class="card">
-      <h3>Saldo atual</h3>
-      <div class="valor" id="saldoAtual">R$ 0,00</div>
+    <section id="areaAutenticacao" class="card">
+      <div class="abas">
+        <button
+          type="button"
+          id="abaEntrar"
+          class="aba ativa"
+        >
+          Entrar
+        </button>
+
+        <button
+          type="button"
+          id="abaCadastrar"
+          class="aba"
+        >
+          Criar conta
+        </button>
+      </div>
+
+      <div id="formularioEntrar">
+        <h2>Entrar na conta</h2>
+
+        <div class="campo">
+          <label for="emailEntrar">E-mail</label>
+          <input
+            type="email"
+            id="emailEntrar"
+            placeholder="seuemail@exemplo.com"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="senhaEntrar">Senha</label>
+          <input
+            type="password"
+            id="senhaEntrar"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button
+          type="button"
+          id="botaoEntrar"
+          class="botao-principal"
+          style="width: 100%;"
+        >
+          Entrar
+        </button>
+      </div>
+
+      <div id="formularioCadastrar" class="oculto">
+        <h2>Criar uma conta</h2>
+
+        <div class="campo">
+          <label for="nomeCadastro">Nome completo</label>
+          <input
+            type="text"
+            id="nomeCadastro"
+            placeholder="Seu nome"
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="emailCadastro">E-mail</label>
+          <input
+            type="email"
+            id="emailCadastro"
+            placeholder="seuemail@exemplo.com"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="senhaCadastro">Senha</label>
+          <input
+            type="password"
+            id="senhaCadastro"
+            placeholder="Mínimo de 6 caracteres"
+            autocomplete="new-password"
+          >
+        </div>
+
+        <button
+          type="button"
+          id="botaoCadastrar"
+          class="botao-secundario"
+          style="width: 100%;"
+        >
+          Criar conta
+        </button>
+      </div>
+
+      <div id="mensagemAutenticacao" class="mensagem"></div>
     </section>
 
-    <section class="card">
-      <h3>Contas adicionadas</h3>
-      <div id="listaContas">
-        Nenhuma conta adicionada.
+    <section id="areaPainel" class="oculto">
+      <div class="card">
+        <div class="usuario-topo">
+          <div>
+            <h3>Minha conta</h3>
+            <div id="emailUsuario" class="email-usuario"></div>
+          </div>
+
+          <button
+            type="button"
+            id="botaoSair"
+            class="botao-sair"
+          >
+            Sair
+          </button>
+        </div>
       </div>
+
+      <div class="saldo-card">
+        <div class="saldo-label">Saldo disponível</div>
+        <div id="saldoUsuario" class="saldo-valor">
+          R$ 0,00
+        </div>
+        <div class="saldo-info">
+          O saldo somente muda quando uma solicitação é aprovada
+          no sistema.
+        </div>
+      </div>
+
+      <section class="card">
+        <h3>Nova solicitação</h3>
+
+        <div class="abas">
+          <button
+            type="button"
+            id="abaDeposito"
+            class="aba ativa"
+          >
+            Depósito
+          </button>
+
+          <button
+            type="button"
+            id="abaSaque"
+            class="aba"
+          >
+            Saque
+          </button>
+        </div>
+
+        <div class="campo">
+          <label for="valorSolicitacao">Valor em reais</label>
+          <input
+            type="number"
+            id="valorSolicitacao"
+            placeholder="Exemplo: 50"
+            min="1"
+            step="0.01"
+          >
+        </div>
+
+        <div id="campoMetodoDeposito" class="campo">
+          <label for="metodoDeposito">Forma de pagamento</label>
+          <select id="metodoDeposito">
+            <option value="pix">Pix — teste</option>
+            <option value="card">Cartão — teste</option>
+            <option value="manual">Manual — teste</option>
+          </select>
+        </div>
+
+        <div id="campoChavePix" class="campo oculto">
+          <label for="chavePix">Chave Pix para receber o saque</label>
+          <input
+            type="text"
+            id="chavePix"
+            placeholder="Digite sua chave Pix"
+          >
+        </div>
+
+        <button
+          type="button"
+          id="botaoSolicitar"
+          class="botao-principal"
+          style="width: 100%;"
+        >
+          Solicitar depósito
+        </button>
+
+        <div id="mensagemSolicitacao" class="mensagem"></div>
+      </section>
+
+      <section class="card">
+        <h3>Solicitações recentes</h3>
+
+        <div id="listaSolicitacoes">
+          <div class="sem-dados">
+            Nenhuma solicitação encontrada.
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Histórico do saldo</h3>
+
+        <div id="listaTransacoes">
+          <div class="sem-dados">
+            Nenhuma movimentação encontrada.
+          </div>
+        </div>
+      </section>
     </section>
-
-    <section class="card">
-      <h3>Análise da mesa</h3>
-
-      <div class="linha">
-        <span>Vermelho</span>
-        <span class="vermelho-texto">45%</span>
-      </div>
-
-      <div class="linha">
-        <span>Azul</span>
-        <span class="azul-texto">45%</span>
-      </div>
-
-      <div class="linha">
-        <span>Empate</span>
-        <span class="amarelo-texto">10%</span>
-      </div>
-    </section>
-
-    <section class="card">
-      <h3>Últimos resultados</h3>
-
-      <div class="resultado">
-        <div class="bolinha bola-vermelha">V</div>
-        <div class="bolinha bola-vermelha">V</div>
-        <div class="bolinha bola-azul">A</div>
-        <div class="bolinha bola-empate">E</div>
-        <div class="bolinha bola-azul">A</div>
-        <div class="bolinha bola-vermelha">V</div>
-      </div>
-    </section>
-
   </main>
 
-  <script>
-    let saldo = Number(localStorage.getItem("saldoBacBo")) || 0;
-    let contas = JSON.parse(localStorage.getItem("contasBacBo")) || [];
+  <script type="module">
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/+esm";
 
-    function atualizarTela() {
-      document.getElementById("saldoAtual").innerText =
-        saldo.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL"
-        });
+    const SUPABASE_URL =
+      "https://edhihbeaxvtvnoecagqd.supabase.co";
 
-      const lista = document.getElementById("listaContas");
+    const SUPABASE_KEY =
+      "COLE_AQUI_SUA_CHAVE_PUBLICAVEL";
 
-      if (contas.length === 0) {
-        lista.innerHTML = "Nenhuma conta adicionada.";
-      } else {
-        lista.innerHTML = contas
-          .map((conta, numero) =>
-            `<div class="linha">
-              <span>${conta}</span>
-              <span>Conta ${numero + 1}</span>
-            </div>`
-          )
-          .join("");
-      }
+    const supabaseClient = createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const areaAutenticacao =
+      document.getElementById("areaAutenticacao");
+
+    const areaPainel =
+      document.getElementById("areaPainel");
+
+    const formularioEntrar =
+      document.getElementById("formularioEntrar");
+
+    const formularioCadastrar =
+      document.getElementById("formularioCadastrar");
+
+    const abaEntrar =
+      document.getElementById("abaEntrar");
+
+    const abaCadastrar =
+      document.getElementById("abaCadastrar");
+
+    const mensagemAutenticacao =
+      document.getElementById("mensagemAutenticacao");
+
+    const mensagemSolicitacao =
+      document.getElementById("mensagemSolicitacao");
+
+    const botaoEntrar =
+      document.getElementById("botaoEntrar");
+
+    const botaoCadastrar =
+      document.getElementById("botaoCadastrar");
+
+    const botaoSair =
+      document.getElementById("botaoSair");
+
+    const abaDeposito =
+      document.getElementById("abaDeposito");
+
+    const abaSaque =
+      document.getElementById("abaSaque");
+
+    const campoMetodoDeposito =
+      document.getElementById("campoMetodoDeposito");
+
+    const campoChavePix =
+      document.getElementById("campoChavePix");
+
+    const botaoSolicitar =
+      document.getElementById("botaoSolicitar");
+
+    let usuarioAtual = null;
+    let tipoSolicitacao = "deposit";
+
+    function mostrarMensagem(elemento, texto, tipo) {
+      elemento.textContent = texto;
+      elemento.className = "mensagem " + tipo;
     }
 
-    function adicionarSaldo() {
-      const valor = prompt("Digite o valor que deseja adicionar:");
+    function limparMensagem(elemento) {
+      elemento.textContent = "";
+      elemento.className = "mensagem";
+    }
 
-      if (valor === null || valor.trim() === "") return;
-
-      const valorConvertido = Number(
-        valor.replace(".", "").replace(",", ".")
+    function formatarDinheiro(valor) {
+      return Number(valor || 0).toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
       );
+    }
 
-      if (isNaN(valorConvertido) || valorConvertido <= 0) {
-        alert("Digite um valor válido.");
+    function formatarData(data) {
+      return new Date(data).toLocaleString("pt-BR");
+    }
+
+    function traduzirStatus(status) {
+      const nomes = {
+        pending: "Pendente",
+        approved: "Aprovado",
+        rejected: "Recusado"
+      };
+
+      return nomes[status] || status;
+    }
+
+    function traduzirTipo(tipo) {
+      return tipo === "deposit"
+        ? "Depósito"
+        : "Saque";
+    }
+
+    function traduzirMetodo(metodo) {
+      const nomes = {
+        pix: "Pix",
+        card: "Cartão",
+        manual: "Manual"
+      };
+
+      return nomes[metodo] || metodo;
+    }
+
+    function mostrarEntrar() {
+      formularioEntrar.classList.remove("oculto");
+      formularioCadastrar.classList.add("oculto");
+
+      abaEntrar.classList.add("ativa");
+      abaCadastrar.classList.remove("ativa");
+
+      limparMensagem(mensagemAutenticacao);
+    }
+
+    function mostrarCadastro() {
+      formularioCadastrar.classList.remove("oculto");
+      formularioEntrar.classList.add("oculto");
+
+      abaCadastrar.classList.add("ativa");
+      abaEntrar.classList.remove("ativa");
+
+      limparMensagem(mensagemAutenticacao);
+    }
+
+    function selecionarDeposito() {
+      tipoSolicitacao = "deposit";
+
+      abaDeposito.classList.add("ativa");
+      abaSaque.classList.remove("ativa");
+
+      campoMetodoDeposito.classList.remove("oculto");
+      campoChavePix.classList.add("oculto");
+
+      botaoSolicitar.textContent =
+        "Solicitar depósito";
+
+      limparMensagem(mensagemSolicitacao);
+    }
+
+    function selecionarSaque() {
+      tipoSolicitacao = "withdrawal";
+
+      abaSaque.classList.add("ativa");
+      abaDeposito.classList.remove("ativa");
+
+      campoMetodoDeposito.classList.add("oculto");
+      campoChavePix.classList.remove("oculto");
+
+      botaoSolicitar.textContent =
+        "Solicitar saque";
+
+      limparMensagem(mensagemSolicitacao);
+    }
+
+    async function cadastrar() {
+      limparMensagem(mensagemAutenticacao);
+
+      const nome =
+        document.getElementById("nomeCadastro")
+          .value.trim();
+
+      const email =
+        document.getElementById("emailCadastro")
+          .value.trim();
+
+      const senha =
+        document.getElementById("senhaCadastro")
+          .value;
+
+      if (!nome || !email || senha.length < 6) {
+        mostrarMensagem(
+          mensagemAutenticacao,
+          "Preencha o nome, o e-mail e uma senha com pelo menos 6 caracteres.",
+          "erro"
+        );
         return;
       }
 
-      saldo += valorConvertido;
-      localStorage.setItem("saldoBacBo", saldo);
-      atualizarTela();
+      botaoCadastrar.disabled = true;
+      botaoCadastrar.textContent = "Criando conta...";
+
+      const { data, error } =
+        await supabaseClient.auth.signUp({
+          email,
+          password: senha,
+          options: {
+            data: {
+              full_name: nome
+            }
+          }
+        });
+
+      botaoCadastrar.disabled = false;
+      botaoCadastrar.textContent = "Criar conta";
+
+      if (error) {
+        mostrarMensagem(
+          mensagemAutenticacao,
+          error.message,
+          "erro"
+        );
+        return;
+      }
+
+      if (!data.session) {
+        mostrarMensagem(
+          mensagemAutenticacao,
+          "Conta criada. Verifique seu e-mail para confirmar o cadastro e depois faça login.",
+          "sucesso"
+        );
+        return;
+      }
+
+      mostrarMensagem(
+        mensagemAutenticacao,
+        "Conta criada com sucesso.",
+        "sucesso"
+      );
     }
 
-    function adicionarConta() {
-      const nome = prompt("Digite o nome da conta:");
+    async function entrar() {
+      limparMensagem(mensagemAutenticacao);
 
-      if (nome === null || nome.trim() === "") return;
+      const email =
+        document.getElementById("emailEntrar")
+          .value.trim();
 
-      contas.push(nome.trim());
-      localStorage.setItem("contasBacBo", JSON.stringify(contas));
-      atualizarTela();
+      const senha =
+        document.getElementById("senhaEntrar")
+          .value;
+
+      if (!email || !senha) {
+        mostrarMensagem(
+          mensagemAutenticacao,
+          "Digite o e-mail e a senha.",
+          "erro"
+        );
+        return;
+      }
+
+      botaoEntrar.disabled = true;
+      botaoEntrar.textContent = "Entrando...";
+
+      const { error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password: senha
+        });
+
+      botaoEntrar.disabled = false;
+      botaoEntrar.textContent = "Entrar";
+
+      if (error) {
+        mostrarMensagem(
+          mensagemAutenticacao,
+          "Não foi possível entrar: " + error.message,
+          "erro"
+        );
+      }
     }
 
-    atualizarTela();
+    async function sair() {
+      await supabaseClient.auth.signOut();
+    }
+
+    async function carregarSaldo() {
+      const saldoElemento =
+        document.getElementById("saldoUsuario");
+
+      const { data, error } =
+        await supabaseClient
+          .from("wallets")
+          .select("balance")
+          .eq("user_id", usuarioAtual.id)
+          .single();
+
+      if (error) {
+        saldoElemento.textContent = "R$ 0,00";
+        return;
+      }
+
+      saldoElemento.textContent =
+        formatarDinheiro(data.balance);
+    }
+
+    async function carregarSolicitacoes() {
+      const lista =
+        document.getElementById("listaSolicitacoes");
+
+      const { data, error } =
+        await supabaseClient
+          .from("payment_requests")
+          .select(
+            "id, request_type, method, amount, status, created_at"
+          )
+          .eq("user_id", usuarioAtual.id)
+          .order("created_at", {
+            ascending: false
+          })
+          .limit(20);
+
+      if (error || !data || data.length === 0) {
+        lista.innerHTML = `
+          <div class="sem-dados">
+            Nenhuma solicitação encontrada.
+          </div>
+        `;
+        return;
+      }
+
+      lista.innerHTML = data.map((item) => `
+        <div class="linha-historico">
+          <div class="linha-cabecalho">
+            <span class="tipo">
+              ${traduzirTipo(item.request_type)}
+            </span>
+
+            <span class="valor">
+              ${formatarDinheiro(item.amount)}
+            </span>
+          </div>
+
+          <div class="detalhes">
+            <span>
+              ${traduzirMetodo(item.method)}
+            </span>
+
+            <span>
+              ${formatarData(item.created_at)}
+            </span>
+          </div>
+
+          <span class="status status-${item.status}">
+            ${traduzirStatus(item.status)}
+          </span>
+        </div>
+      `).join("");
+    }
+
+    async function carregarTransacoes() {
+      const lista =
+        document.getElementById("listaTransacoes");
+
+      const { data, error } =
+        await supabaseClient
+          .from("transactions")
+          .select(
+            "id, transaction_type, amount, description, created_at"
+          )
+          .eq("user_id", usuarioAtual.id)
+          .order("created_at", {
+            ascending: false
+          })
+          .limit(20);
+
+      if (error || !data || data.length === 0) {
+        lista.innerHTML = `
+          <div class="sem-dados">
+            Nenhuma movimentação encontrada.
+          </div>
+        `;
+        return;
+      }
+
+      lista.innerHTML = data.map((item) => `
+        <div class="linha-historico">
+          <div class="linha-cabecalho">
+            <span class="tipo">
+              ${item.transaction_type === "credit"
+                ? "Crédito"
+                : "Débito"}
+            </span>
+
+            <span class="valor">
+              ${formatarDinheiro(item.amount)}
+            </span>
+          </div>
+
+          <div class="detalhes">
+            <span>
+              ${item.description || "Movimentação"}
+            </span>
+
+            <span>
+              ${formatarData(item.created_at)}
+            </span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function carregarPainel() {
+      if (!usuarioAtual) return;
+
+      document.getElementById("emailUsuario")
+        .textContent = usuarioAtual.email || "";
+
+      await Promise.all([
+        carregarSaldo(),
+        carregarSolicitacoes(),
+        carregarTransacoes()
+      ]);
+    }
+
+    async function criarSolicitacao() {
+      limparMensagem(mensagemSolicitacao);
+
+      const valor =
+        Number(
+          document.getElementById("valorSolicitacao")
+            .value
+        );
+
+      const chavePix =
+        document.getElementById("chavePix")
+          .value.trim();
+
+      if (!valor || valor <= 0) {
+        mostrarMensagem(
+          mensagemSolicitacao,
+          "Digite um valor válido.",
+          "erro"
+        );
+        return;
+      }
+
+      if (
+        tipoSolicitacao === "withdrawal" &&
+        !chavePix
+      ) {
+        mostrarMensagem(
+          mensagemSolicitacao,
+          "Digite a chave Pix para solicitar o saque.",
+          "erro"
+        );
+        return;
+      }
+
+      const metodo =
+        tipoSolicitacao === "withdrawal"
+          ? "pix"
+          : document.getElementById("metodoDeposito")
+              .value;
+
+      botaoSolicitar.disabled = true;
+      botaoSolicitar.textContent = "Enviando...";
+
+      const { error } =
+        await supabaseClient
+          .from("payment_requests")
+          .insert({
+            user_id: usuarioAtual.id,
+            request_type: tipoSolicitacao,
+            method: metodo,
+            amount: valor,
+            pix_key:
+              tipoSolicitacao === "withdrawal"
+                ? chavePix
+                : null,
+            status: "pending"
+          });
+
+      botaoSolicitar.disabled = false;
+      botaoSolicitar.textContent =
+        tipoSolicitacao === "deposit"
+          ? "Solicitar depósito"
+          : "Solicitar saque";
+
+      if (error) {
+        mostrarMensagem(
+          mensagemSolicitacao,
+          "Erro ao criar solicitação: " + error.message,
+          "erro"
+        );
+        return;
+      }
+
+      document.getElementById("valorSolicitacao")
+        .value = "";
+
+      document.getElementById("chavePix")
+        .value = "";
+
+      mostrarMensagem(
+        mensagemSolicitacao,
+        "Solicitação registrada como pendente.",
+        "sucesso"
+      );
+
+      await carregarSolicitacoes();
+    }
+
+    function atualizarTelaPorSessao(session) {
+      usuarioAtual = session?.user || null;
+
+      if (usuarioAtual) {
+        areaAutenticacao.classList.add("oculto");
+        areaPainel.classList.remove("oculto");
+        carregarPainel();
+      } else {
+        areaPainel.classList.add("oculto");
+        areaAutenticacao.classList.remove("oculto");
+      }
+    }
+
+    abaEntrar.addEventListener(
+      "click",
+      mostrarEntrar
+    );
+
+    abaCadastrar.addEventListener(
+      "click",
+      mostrarCadastro
+    );
+
+    abaDeposito.addEventListener(
+      "click",
+      selecionarDeposito
+    );
+
+    abaSaque.addEventListener(
+      "click",
+      selecionarSaque
+    );
+
+    botaoCadastrar.addEventListener(
+      "click",
+      cadastrar
+    );
+
+    botaoEntrar.addEventListener(
+      "click",
+      entrar
+    );
+
+    botaoSair.addEventListener(
+      "click",
+      sair
+    );
+
+    botaoSolicitar.addEventListener(
+      "click",
+      criarSolicitacao
+    );
+
+    const { data: sessaoInicial } =
+      await supabaseClient.auth.getSession();
+
+    atualizarTelaPorSessao(
+      sessaoInicial.session
+    );
+
+    supabaseClient.auth.onAuthStateChange(
+      (_evento, session) => {
+        atualizarTelaPorSessao(session);
+      }
+    );
   </script>
-
 </body>
 </html>
