@@ -1014,8 +1014,44 @@
 
       botaoSolicitar.disabled = true;
       botaoSolicitar.textContent = "Enviando...";
+if (tipoSolicitacao === "deposit") {
+  const { data: dadosPix, error: erroPix } =
+    await supabaseClient.functions.invoke(
+      "create-pix-order",
+      {
+        body: {
+          amount: valor
+        }
+      }
+    );
 
-      const { error } =
+  if (erroPix || !dadosPix?.success) {
+    botaoSolicitar.disabled = false;
+    botaoSolicitar.textContent = "Solicitar depósito";
+
+    mostrarMensagem(
+      mensagemSolicitacao,
+      dadosPix?.error ||
+        erroPix?.message ||
+        "Não foi possível gerar o Pix.",
+      "erro"
+    );
+
+    return;
+  }
+
+  const codigoPix =
+    dadosPix.qr_code || dadosPix.ticket_url;
+
+  if (codigoPix) {
+    window.prompt(
+      "Copie o Pix para realizar o pagamento:",
+      codigoPix
+  );
+  }
+   return;
+}
+      const { error  } =
         await supabaseClient
           .from("payment_requests")
           .insert({
